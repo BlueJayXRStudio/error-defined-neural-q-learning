@@ -90,6 +90,65 @@ remain unchanged. This also applies between successive reverse-replay batches.
 | Training environments | One |
 | Device and threads | CPU, one PyTorch thread |
 
+## Relation to Universal Value-Function Uncertainties
+
+[Universal Value-Function Uncertainties (UVU; Zanger et al., 2026)](https://proceedings.iclr.cc/paper_files/paper/2026/file/7a8f0294b74683b3405f3089d7ffa1b7-Paper-Conference.pdf#page=4)
+estimates policy-dependent value uncertainty. Using notation consistent with
+this document, let $f$ denote its frozen random function, $u_\phi$ its predictor,
+and $x=(s,a,z)$ include a policy context $z$. For a nonterminal transition to
+$x'=(s',a',z)$, its synthetic reward is
+
+$$
+\widetilde r(x,x')=f(x)-\gamma f(x').
+$$
+
+With a lagged predictor as in the released implementation, the detached target
+and prediction loss are
+
+$$
+\begin{aligned}
+y_u &= \widetilde r(x,x')+\gamma u_{\bar\phi}(x'), \\
+\mathcal L_{\mathrm{UVU}}(\phi)
+&=\frac12\mathbb E\left[\left\lVert u_\phi(x)-y_u\right\rVert_2^2\right].
+\end{aligned}
+$$
+
+The paper defines uncertainty from squared disagreement between $u_\phi$ and
+$f$. Its synthetic reward makes $f$ a solution to the TD objective; disagreement
+measures uncertainty about values rather than their reward sign.
+
+The [official code](https://github.com/anyboby/universal-value-function-uncertainties/blob/master/run_uvu_doors_offline.py#L270-L312)
+trains a separate conventional Q-function on environment rewards. UVU's own
+update does not receive those rewards. Signed errors do participate in its
+next-action selection through $Q_{\mathrm{conventional}}+u_{\phi,k}-f_k$ for
+head $k$, but do not replace the reward-trained Q-function. UVU has no frozen
+initial-predictor error denominator or logarithmic value mapping.
+
+Here, the TD loss instead fits $Q_\theta$, the transformed squared error itself,
+to $r+\gamma\max_{a'}Q_{\bar\theta}(s',a')$, with terminal masking as specified
+above. There is no separate conventional Q-function. The fixed initial error
+sets Q to zero at initialization; it does not ensure zero values at untrained
+inputs after subsequent updates.
+
+The objectives differ even on a terminal sample. UVU's implemented terminal
+target for the prediction residual $u_\phi-f$ is zero, independently of the
+observed reward. Error-Defined Neural Q-Learning instead targets $Q_\theta=r$.
+With $c=100$, matching those terminal values requires
+
+$$
+\frac{e_\theta(x)+\eta}{e_0(x)+\eta}
+=10^{-r/100}
+=\begin{cases}
+0.1, & r=+100,\\
+10, & r=-100.
+\end{cases}
+$$
+
+Thus a negative value is encoded by maintaining error above the initial
+reference, while a positive value requires error below it. The distinction is
+in both the value definition and the optimized objective; it does not by itself
+establish a performance or stability advantage.
+
 ## Rewards, episode handling, and replay
 
 Learning rewards are zero on every nonterminal transition. Native terminal

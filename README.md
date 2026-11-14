@@ -182,14 +182,25 @@ components of deep Q-learning
 ([Mnih et al., 2015](https://doi.org/10.1038/nature14236)); backward replay has a
 direct precedent in [Lin, 1992, Section 2.3](https://link.springer.com/content/pdf/10.1007/BF00992699.pdf#page=7).
 
-Related representations include
-[free-energy Q-values](https://proceedings.neurips.cc/paper/2000/hash/2d1b2a5ff364606ff041650887723470-Abstract.html),
-[RND penalties in offline SAC](https://proceedings.mlr.press/v202/nikulin23a.html),
-and [TD-trained random-network prediction errors for value uncertainty](https://arxiv.org/abs/2505.21119).
-The formulation studied here combines a frozen initial reference, a signed
-logarithmic error ratio, and direct Bellman regression on terminal learning
-rewards. These connections and the current experiments do not establish a
-worldwide priority claim or isolate which component explains the observed result.
+[Universal Value-Function Uncertainties (UVU; Zanger et al., 2026)](https://proceedings.iclr.cc/paper_files/paper/2026/file/7a8f0294b74683b3405f3089d7ffa1b7-Paper-Conference.pdf)
+also combines random-network prediction errors with TD learning. UVU trains a
+predictor on synthetic rewards derived from a frozen random network and uses
+its disagreement to estimate policy-dependent value uncertainty. Its
+[released implementation](https://github.com/anyboby/universal-value-function-uncertainties/blob/master/run_uvu_doors_offline.py#L270-L312)
+retains a separate reward-trained Q-function and adds signed prediction errors
+when selecting next actions for uncertainty bootstrapping. In Error-Defined
+Neural Q-Learning, the logarithmic initial/current squared-error ratio is the
+signed Q-value itself, fitted directly to reward-based Bellman targets. The
+frozen initial error supplies the zero reference; prediction error above or
+below it encodes negative or positive Q, respectively. The
+[methods comparison](docs/method.md#relation-to-universal-value-function-uncertainties)
+gives the objectives and their different treatment of terminal outcomes.
+
+Other related representations include
+[free-energy Q-values](https://proceedings.neurips.cc/paper/2000/hash/2d1b2a5ff364606ff041650887723470-Abstract.html)
+and [RND penalties in offline SAC](https://proceedings.mlr.press/v202/nikulin23a.html).
+These connections and the current experiments do not establish a worldwide
+priority claim or isolate which component explains the observed result.
 
 ## Citation and license
 
