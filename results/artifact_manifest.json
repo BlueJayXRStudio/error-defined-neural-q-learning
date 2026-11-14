@@ -1,0 +1,51 @@
+{
+  "checkpoint_export": "Byte-for-byte copy; all network, Adam, configuration and controller values retained. Its historical format-1 method identifier is rnd_error_q.",
+  "record_export": "Evaluation numbers and per-episode records are preserved. Evaluation files were grouped by protocol; segment labels were added to epoch and monitoring records. Absolute local paths and launch/process bookkeeping were omitted. Monitoring retains summaries and controller decisions. Original recorded configurations are retained in training_lineage.json.",
+  "holdout_verification": {
+    "episodes": 500,
+    "landings": 422,
+    "crashes": 15,
+    "timeouts": 63,
+    "mean_raw_return": 132.20329624399324,
+    "unique_initial_observations": 500,
+    "stream_seed_once_then_unseeded_resets": true,
+    "all_episode_checkpoint_hashes_match": true
+  },
+  "curve_verification": {
+    "epoch_records": 898,
+    "complete_epochs": 895,
+    "partial_epoch_records": 3,
+    "monitoring_checks": 90,
+    "monitoring_episodes": 4500,
+    "training_interactions": 57740187,
+    "optimizer_updates": 597226
+  },
+  "files": {
+    "checkpoints/epoch_000810.pt": {
+      "sha256": "bdcc186d447c377038ffa164dc16097e2cecbc2559e5208f05cded98c74422b7",
+      "bytes": 335989
+    },
+    "results/holdout.json": {
+      "sha256": "d152d2bfcf184a691b1f00bb7a86aa4c98f4cf9d18a5326e61a97d861a8d82b9",
+      "bytes": 474633
+    },
+    "results/evaluation_banks.json": {
+      "sha256": "8c3d747a9fa5ac3d85272656f3fa1683e66663d8f59a686fc1894fdcb5bad573",
+      "bytes": 505458
+    },
+    "results/training_epochs.jsonl": {
+      "sha256": "e4d1c1b387bb9a8dfcf2aa0fe721712dc41f033ebe15531cd9d6735025d94235",
+      "bytes": 852877
+    },
+    "results/monitoring.jsonl": {
+      "sha256": "2ba345420d4741f9250f31c683eb799a6798111856c29a8e16cabad8ca29faaf",
+      "bytes": 94192
+    },
+    "results/training_lineage.json": {
+      "sha256": "1e6c547ed5b36e6417ad4de6cd5df527af0215482268b393e4301f12a77670b6",
+      "bytes": 21119
+    }
+  },
+  "checkpoint_model_sha256": "4c96b6b5c3e25caee1e224e06abb0c7a8dc2faf36b1bd7c456776f20b0122b64",
+  "checkpoint_model_digest_format": "SHA-256 over lexicographically sorted state_dict entries: parameter name bytes, str((torch dtype, shape tuple)) bytes, then contiguous CPU NumPy tensor bytes."
+}

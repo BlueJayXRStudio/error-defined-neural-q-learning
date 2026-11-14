@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Please cite this repository when using the method, implementation, or experimental results."
+title: "Error-Defined Neural Q-Learning for Sparse Terminal Rewards"
+type: software
+authors:
+  - family-names: Oh
+    given-names: Jaeyoung
+version: 0.1.0
+date-released: 2026-11-14
+license: MIT
+repository-code: "https://github.com/BlueJayXRStudio/error-defined-neural-q-learning"
+keywords:
+  - neural Q-learning
+  - deep reinforcement learning
+  - sparse rewards
+  - random network distillation
+  - LunarLander

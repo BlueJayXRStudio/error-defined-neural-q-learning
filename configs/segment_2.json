@@ -1,0 +1,42 @@
+{
+  "env_id": "LunarLander-v3",
+  "seed": 104,
+  "device": "cpu",
+  "cpu_threads": 1,
+  "observation_input": "raw_with_time",
+  "make_sparse": true,
+  "max_episode_steps": 1000,
+  "epochs": 10000,
+  "steps_per_epoch": 64000,
+  "wall_minutes": 40.0,
+  "hidden_sizes": [
+    64,
+    64
+  ],
+  "feature_dim": 128,
+  "q_scale": 100.0,
+  "error_epsilon": 1e-08,
+  "gamma": 0.99,
+  "epsilon": 0.1,
+  "epsilon_decay_epochs": 0,
+  "replay_capacity": 100000,
+  "batch_size": 32,
+  "replay_updates_per_episode": 1,
+  "learning_rate": 0.0003,
+  "max_grad_norm": 10.0,
+  "target_tau": 0.005,
+  "epsilon_decay_seconds": 0,
+  "epsilon_switching": {
+    "monitor_every_epochs": 10,
+    "monitor_episodes": 50,
+    "monitor_seed": 2000001,
+    "min_phase_epochs": 10,
+    "max_exploration_epochs": 30,
+    "improvement_delta": 0.05,
+    "drop_delta": 0.15,
+    "patience_checks": 3,
+    "confirmation_checks": 2,
+    "healthy_rate": 0.8
+  },
+  "checkpoint_every_epochs": 1
+}

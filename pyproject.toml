@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "error-defined-neural-q-learning"
+version = "0.1.0"
+description = "Error-defined neural Q-learning for sparse terminal rewards"
+readme = "README.md"
+requires-python = ">=3.9,<3.13"
+license = {file = "LICENSE"}
+authors = [{name = "Jaeyoung Oh"}]
+keywords = ["reinforcement learning", "Q-learning", "sparse rewards", "random network distillation", "LunarLander"]
+dependencies = [
+    "torch==2.8.0",
+    "numpy==2.0.2",
+    "gymnasium[box2d]==1.1.1",
+    "box2d-py==2.3.5",
+    "pygame==2.6.1",
+]
+
+[project.urls]
+Repository = "https://github.com/BlueJayXRStudio/error-defined-neural-q-learning"
+
+[project.scripts]
+ednq-train = "error_defined_q.train:main"
+ednq-evaluate = "error_defined_q.evaluate:main"
+
+[tool.setuptools.packages.find]
+include = ["error_defined_q*"]
