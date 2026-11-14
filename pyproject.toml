@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "error-defined-neural-q-learning"
-version = "0.1.0"
+version = "0.1.1"
 description = "Error-defined neural Q-learning for sparse terminal rewards"
 readme = "README.md"
 requires-python = ">=3.9,<3.13"
