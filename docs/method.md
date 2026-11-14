@@ -23,6 +23,15 @@ Q_\theta(x)=c\log_{10}\left(\frac{e_0(x)+\eta}{e_\theta(x)+\eta}\right),
 \qquad c=100,\quad\eta=10^{-8}.
 $$
 
+The same definition in plain text, with `g` the trainable predictor, `g0` its
+frozen initial copy, and `mean` taken over the output features:
+
+```text
+initial_error(x) = mean((g0(x) - f(x))**2)
+current_error(x) = mean((g(x) - f(x))**2)
+Q(x) = 100 * log10((initial_error(x) + 1e-8) / (current_error(x) + 1e-8))
+```
+
 The live predictor initially equals $g_0$, giving exactly zero Q at every
 input. Error reduction gives positive Q; error increase gives negative Q.
 The fixed reference is evaluated at each input throughout training. It does

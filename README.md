@@ -42,6 +42,15 @@ Q_\theta(x)=c\log_{10}\left(
 \qquad c=100,\quad\eta=10^{-8}.
 $$
 
+The same definition in plain text, with `g` the trainable predictor, `g0` its
+frozen initial copy, and `mean` taken over the output features:
+
+```text
+initial_error(x) = mean((g0(x) - f(x))**2)
+current_error(x) = mean((g(x) - f(x))**2)
+Q(x) = 100 * log10((initial_error(x) + 1e-8) / (current_error(x) + 1e-8))
+```
+
 This definition gives exactly zero Q-values at initialization. Error below the
 initial reference produces positive Q; error above it produces negative Q.
 A separate lagged predictor supplies detached Q-learning targets. Adam trains
