@@ -19,7 +19,7 @@ e_\theta(x) &= \frac{1}{d}\left\lVert g_\theta(x)-f(x)\right\rVert_2^2.
 $$
 
 $$
-Q_\theta(x)=c\log_{10}\!\left(\frac{e_0(x)+\eta}{e_\theta(x)+\eta}\right),
+Q_\theta(x)=c\log_{10}\left(\frac{e_0(x)+\eta}{e_\theta(x)+\eta}\right),
 \qquad c=100,\quad\eta=10^{-8}.
 $$
 

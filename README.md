@@ -36,7 +36,7 @@ $$
 The error-defined action value is
 
 $$
-Q_\theta(x)=c\log_{10}\!\left(
+Q_\theta(x)=c\log_{10}\left(
 \frac{e_0(x)+\eta}{e_\theta(x)+\eta}
 \right),
 \qquad c=100,\quad\eta=10^{-8}.
